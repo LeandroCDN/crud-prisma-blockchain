@@ -2,8 +2,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-````
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Branch Initial Set Up
@@ -20,7 +18,7 @@ npx create-next-app@latest
 √ Would you like to use src/ directory? ... / Yes
 √ Would you like to use App Router? (recommended) ...  / Yes
 √ Would you like to customize the default import alias (@/*)? »  / Yes
-````
+```
 
 - First use npm install to install all dependencies.
 
