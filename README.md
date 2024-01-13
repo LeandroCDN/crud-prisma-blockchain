@@ -33,3 +33,22 @@ pnpm dev
 # or
 bun dev
 ```
+
+## Connect Wallet branch
+
+Here we use [Web3Modal](https://web3modal.com/) (with Ethers 5) to mannage our connection with the user wallets.
+
+1. install web3modal/ethers and ethers v@5.7.2
+
+```bash
+npm install @web3modal/ethers5 ethers@5.7.2
+```
+
+2. Create a folder 'components' inot src (not in app!)
+3. Create a file components/Nav.tsx
+4. Make a simple 'nav bar' with html/css/ts'
+5. Create a file components/ConnectWallet.tsx
+6. Create a folder context into src
+7. Create file context/Web3Modal.tsx
+8. Use ConnectWallet into the NavBar
+9. Edit layout.tsx
