@@ -18,9 +18,13 @@ npx create-next-app@latest
 √ Would you like to customize the default import alias (@/*)? »  / Yes
 ```
 
-- First use npm install to install all dependencies.
+1. First use npm install to install all dependencies.
 
-- Second, run the development server:
+```bash
+npm install
+```
+
+2. Second, run the development server:
 
 ```bash
 npm run dev
@@ -45,11 +49,10 @@ npm install @web3modal/ethers5 ethers@5.7.2
 2. Create a folder 'components' inot src (not in app!)
 3. Create a file components/Nav.tsx
 4. Make a simple 'nav bar' with html/css/ts'
-5. Create a file components/ConnectWallet.tsx
-6. Create a folder context into src
-7. Create file context/Web3Modal.tsx
-8. Use ConnectWallet into the NavBar
-9. Edit layout.tsx
+5. Create a folder context into src
+6. Create file context/Web3Modal.tsx
+7. Use ConnectWallet into the NavBar
+8. Edit layout.tsx
 
 ## 3. api POST Method
 
@@ -59,7 +62,7 @@ I assume you know how to create a mongo db account.
 1. Install the Prisma CLI as a development dependency:
 
 ```bash
-
+npm i -D prisma
 ```
 
 2. To initialize Prisma within the project, simply run:
