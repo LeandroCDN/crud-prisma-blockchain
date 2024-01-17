@@ -97,3 +97,19 @@ npx prisma generate
 ### note
 
 - We add GetWalletData.tsx in components to get wallet data , you can use this component in development to view its data in console.
+
+## RoutesAndContext
+
+In this Step we make a lot of thinks
+
+- new GET method in api/login/[id] (dynamic routes)
+- Check user in the form compnents/LoginForm.tsx
+- Create a dashboard page to show de user data
+- use a Context to create a global state in the app to pass data between pages
+
+1. Crete a folder [id] in api/login and route.tsx
+2. Create loadingContext in ./context/
+3. wrap your layout.tsx between <LoadingProvider></LoadingProvider>. This is the permit to use your context un your all app.
+4. Import the useLoading In your form (LoginForm in this case), this file have some changes.
+5. Populate the context with `res`
+6. Use context in the dashboard/[id]/page.tsx to get your data.
