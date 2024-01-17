@@ -81,6 +81,10 @@ This create a folder root/prisma/scheme.prisma
 8. Run
 
 ```bash
+npx prisma db push
+```
+
+```bash
 npx prisma generate
 ```
 

@@ -1,4 +1,5 @@
 "use client";
+import { useLoading } from "@/context/loadingContext";
 import {
   useWeb3ModalProvider,
   useWeb3ModalAccount,
@@ -7,12 +8,14 @@ import {
 export default function GetWalletData() {
   const { address, chainId, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
-
+  const { userData, setUserData } = useLoading();
   async function getBalance() {
     console.log("address: ", address);
     console.log("chainId: ", chainId);
     console.log("isConnected: ", isConnected);
     console.log("walletProvider: ", walletProvider);
+    setUserData("HOLA");
+    console.log("userData: ", userData);
   }
 
   return (

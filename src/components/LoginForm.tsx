@@ -4,18 +4,26 @@ import {
   useWeb3ModalProvider,
   useWeb3ModalAccount,
 } from "@web3modal/ethers5/react";
+import { useRouter } from "next/navigation";
+import { useLoading } from "../context/loadingContext";
 
 function LoginForm() {
   const [name, setName] = useState("");
-
+  const route = useRouter();
   // web3modal (isConnected)? enableform : disableForm
   const { address, isConnected } = useWeb3ModalAccount();
+  const { userData, setUserData } = useLoading();
 
-  return isConnected ? (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        const res = await fetch("/api/login", {
+  const login = async (e) => {
+    e.preventDefault();
+
+    try {
+      let res = await fetch(`/api/login/${address}`, {
+        method: "GET",
+      });
+      let data = await res.json();
+      if (data == null) {
+        res = await fetch("/api/login", {
           method: "POST",
           body: JSON.stringify({
             address,
@@ -25,10 +33,18 @@ function LoginForm() {
             "Content-Type": "application/json",
           },
         });
-        const data = await res.json();
-        console.log(data);
-      }}
-    >
+        data = await res.json();
+      }
+      route.push(`/dashboard/${address}`);
+      setUserData(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Login Error: ", error);
+    }
+  };
+
+  return isConnected ? (
+    <form onSubmit={login}>
       <input
         type="text"
         name="name"
