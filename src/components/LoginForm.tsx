@@ -18,6 +18,7 @@ function LoginForm() {
     e.preventDefault();
 
     try {
+      // axios
       let res = await fetch(`/api/login/${address}`, {
         method: "GET",
       });

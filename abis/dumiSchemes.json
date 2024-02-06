@@ -1,0 +1,60 @@
+{
+  "user": {
+    "id": "65b67dda14e2137a52157f56",
+    "address": "0x7235303901acfb131b3EEE12a1FE802ec6F98A96",
+    "name": "asd",
+    "balance": "1",
+    "cretedAt": "2024-01-28T16:16:26.800+00:00",
+    "updatedAt": "2024-02-01T23:39:30.258+00:00",
+    "Assets": [
+      {
+        "tool": 1,
+        "lastHarvest": "2024-02-01T23:39:30.258+00:00",
+        "CreatedAt": "2024-01-28T16:16:26.800+00:00"
+      },
+      {
+        "tool": 3,
+        "lastHarvest": "2024-02-01T23:39:30.258+00:00",
+        "CreatedAt": "2024-01-28T16:16:26.800+00:00"
+      },
+      {
+        "tool": 1,
+        "lastHarvest": "2024-02-01T23:39:30.258+00:00",
+        "CreatedAt": "2024-01-28T16:16:26.800+00:00"
+      }
+    ]
+  },
+
+  "Tools": [
+    {
+      "lvl": 0,
+      "Produccion por HORA": 20,
+      "AlmacenamintoMaximo": "1 hora",
+      "Durabilidad": 20
+    },
+    {
+      "lvl": 1,
+      "Produccion por HORA": 60,
+      "AlmacenamintoMaximo": "2 HORAS",
+      "Durabilidad": 100
+    },
+    {
+      "lvl": 2,
+      "Produccion por HORA": 90,
+      "AlmacenamintoMaximo": "4 HORAS",
+      "Durabilidad": 110
+    },
+    {
+      "lvl": 3,
+      "Produccion por HORA": 135,
+      "AlmacenamintoMaximo": "6 HORAS",
+      "Durabilidad": 130
+    },
+    {
+      "lvl": 4,
+      "Produccion por HORA": 200,
+      "AlmacenamintoMaximo": "8 HORAS",
+      "Durabilidad": 140
+    }
+  ]
+}
