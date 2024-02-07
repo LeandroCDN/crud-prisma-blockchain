@@ -24,8 +24,8 @@ export default function RootLayout({
           <div>
             <Web3ModalProvider>
               <Nav />
-            </Web3ModalProvider>
             <div>{children}</div>
+            </Web3ModalProvider>
           </div>
         </LoadingProvider>
       </body>

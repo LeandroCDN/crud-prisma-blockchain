@@ -12,10 +12,12 @@ export async function POST(request: Request) {
     let { address, name } = await request.json();
     // address = address.slice(2);
     console.log("POST RAN, data: ", address, name);
+    const balance = 0;
     const newUser = await prisma?.user.create({
       data: {
         address,
         name,
+        balance,
       },
     });
 

@@ -14,6 +14,15 @@ const mainnet = {
   rpcUrl: "https://cloudflare-eth.com",
 };
 
+const testnet = {
+  chainId: 97,
+  name: "BSCTest",
+  currency: "tBSC",
+  explorerUrl: "https://testnet.bscscan.com/",
+  rpcUrl: "https://bsc-testnet.publicnode.com",
+};
+
+
 // 3. Create modal
 const metadata = {
   name: "My Website",
@@ -24,7 +33,7 @@ const metadata = {
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
-  chains: [mainnet],
+  chains: [mainnet, testnet],
   projectId,
 });
 
