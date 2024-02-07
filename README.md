@@ -113,3 +113,38 @@ In this Step we make a lot of thinks
 4. Import the useLoading In your form (LoginForm in this case), this file have some changes.
 5. Populate the context with `res`
 6. Use context in the dashboard/[id]/page.tsx to get your data.
+
+
+# Deposit And Withdraw api
+    In this stage, we introduce several connection system changes by creating a ConnectButton.tsx file and removing the LoginForm. The ConnectButton now handles connection calls and encompasses the login logic.
+
+    The primary modifications are made in BalanceButton.tsx and the api/deposit and api/withdraw files, where deposit and withdrawal functionalities are managed.
+
+    As a best practice, we've included an actions folder to encapsulate common functions. This folder must be invoked on the server-side for optimal functionality.
+
+
+Changed files: 
+D: Archivo eliminado.
+A: Archivo añadido (nuevo).
+A       abis/ERC20.json
+A       .vscode/settings.json
+A       src/constants/web3.tsx
+A       src/app/actions/get-user.ts
+A       src/components/ConnectButton.tsx
+A       src/components/BalanceButton.tsx
+A       src/components/SimpleBoxCard.tsx
+A       src/app/actions/get-address-from-signature.ts
+A       src/app/api/deposit/[address]/[hash]/route.ts
+A       src/app/api/withdraw/[address]/[value]/route.ts
+
+M: Archivo modificado.
+M       .env
+M       src/app/api/login/route.ts : Add balance value
+M       .gitignore : add .env
+M       prisma/schema.prisma :  Add balance param
+M       src/app/dashboard/[id]/page.tsx : add commented status
+M       src/app/layout.tsx : - change 1 line
+M       src/app/page.tsx : commmented some lines
+M       src/components/Nav.tsx : hard changes - add BalanceButton component & ConnnectButton
+M       src/context/Web3Modal.tsx : Add bscTestnet
+
