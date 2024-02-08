@@ -9,7 +9,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    let { address, name } = await request.json();
+    let { address, name, assets } = await request.json();
     // address = address.slice(2);
     console.log("POST RAN, data: ", address, name);
     const balance = 0;
@@ -18,6 +18,7 @@ export async function POST(request: Request) {
         address,
         name,
         balance,
+        assets,
       },
     });
 
