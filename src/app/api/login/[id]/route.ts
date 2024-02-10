@@ -10,7 +10,6 @@ export async function GET(req, { params }) {
         address: id,
       },
     });
-    console.log(userData);
     return NextResponse.json(userData);
   } catch (error) {
     console.log("Post Prisma Error: ", error);

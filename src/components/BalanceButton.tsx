@@ -16,6 +16,7 @@ const Balance = () => {
   const [value, setValue] = useState("");
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
+  const { userData } = useLoading();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -42,10 +43,9 @@ const Balance = () => {
         value.toString()
       );
       const rs = await USDTBalance.wait();
-      console.log("rs: ", rs);
+
       if (rs != null) {
         // const res = await deposit(address, parseInt(value));
-        console.log("api POST");
         const res = await fetch(
           `/api/deposit/${address}/${rs.transactionHash}`,
           {
@@ -53,17 +53,16 @@ const Balance = () => {
           }
         );
         const data = await res.json();
-
-        console.log(data);
+        if (res != null) {
+          alert(`deposit end, your balance: ${data?.balance}`);
+        }
       }
       // Handle the result as needed
     } else if (action === "withdraw") {
       // Withdraw logic
       // const res = await withdrawBack({ address, value });
-      
       // const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
       const signedMessage = await signMessage(ethersProvider.getSigner());
-      console.log(signedMessage);
       const res = await fetch(`/api/withdraw/${address}/${value.toString()}`, {
         method: "POST",
         body: JSON.stringify({
@@ -98,7 +97,7 @@ const Balance = () => {
   return (
     isConnected && (
       <div className="flex flex-row m-4 justify-center px-2 py-1 rounded bg-gray-600 text-xl w-full">
-        <div>Balance: 9999 </div>
+        <div>Balance: {userData.balance} </div>
         <div className="flex flex-row ml-2">
           <p>|</p>
           <button

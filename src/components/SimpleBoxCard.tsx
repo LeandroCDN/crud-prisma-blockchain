@@ -1,34 +1,81 @@
-import React from "react";
+"use client";
+import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
+import { useRouter } from "next/navigation";
+import { useLoading } from "@/context/loadingContext";
+// import React from "react";
 
 const SimpleBoxCard = (props: any) => {
+  const { address, isConnected } = useWeb3ModalAccount();
+  const { userData, tools, setUserData } = useLoading();
+  const route = useRouter();
+
+  function getActualProfit() {
+    const dateNow = new Date();
+    const index = parseInt(props.i);
+    const lastHarvestTime = new Date(userData?.assets[index]?.lastHarvest || 0); // Si lastHarvest es null o undefined, establecerlo a 0
+    const difTime = dateNow.getTime() - lastHarvestTime.getTime();
+
+    const difTimeInHours = Math.trunc(difTime / (1000 * 60)); // Convertir milisegundos a horas y truncar
+    let totalProduction = tools[index].production * difTimeInHours;
+    if (totalProduction > tools[index].storage) {
+      totalProduction = tools[index].storage;
+    }
+
+    return totalProduction;
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!isConnected) throw Error("User disconnected");
+    // const res = await deposit(address, parseInt(value));
+    const index = parseInt(props.i);
+    const res = await fetch(`/api/assets/harvest`, {
+      method: "POST",
+      body: JSON.stringify({
+        address,
+        index,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await res.json();
+    setUserData(data);
+    console.log("Harvest tool RES: ", data);
+    route.refresh();
+  };
+
   return (
     <div>
-      <div className="flex flex-col xl:flex-row items-center justify-center w-full xl:items-stretch my-4">
-        <div className="flex-col xl:max-w-[70%] max-w-[90%]  shadow-lg rounded-xl border border-radius mb-5 xl:mb-0 min-w-80">
+      <div className="flex flex-col xl:flex-row items-center justify-center w-full xl:items-stretch my-4 ">
+        <div className="flex-col xl:max-w-[60%] max-w-[70%]  shadow-lg rounded-xl border border-radius mb-5 xl:mb-0 min-w-80 bg-white bg-opacity-10">
           {/* <img src="https://i.postimg.cc/SxLx0fHV/bg01.jpg" alt="image3" className="w-full h-48 imgcard object-cover mb-2" /> */}
           <div className="px-5 py-3">
             <div className="flex flex-row justify-between w-full">
               <div className={` text-xl mb-2 }`}>{props.title}</div>
               <p> 1 year </p>
             </div>
-            <p className="text-gray-700  text-base mb-2">
-              Procution: {props.production}/Min
+            <p className="text-gray-800  text-base mb-2">
+              Production: {props.production}/Min
             </p>
-            <p className="text-gray-700  text-base">
-              Storage: {props.storage}/{props.fullSotorage}
+            <p className="text-gray-800  text-base">
+              Storage: {getActualProfit()}/{props.fullSotorage}
             </p>
-            <p className="text-gray-700  text-base">
+            <p className="text-gray-800  text-base">
               Durability: {props.state}/{props.fullDurability} Days
             </p>
           </div>
           <div className="px-6 mt-4">
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-700 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
+            <button
+              onClick={(e) => handleSubmit(e)}
+              className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50"
+            >
               Harvest
-            </span>
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-700 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
+            </button>
+            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
               Update
             </span>
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-700 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
+            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
               Repair
             </span>
           </div>

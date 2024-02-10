@@ -114,37 +114,45 @@ In this Step we make a lot of thinks
 5. Populate the context with `res`
 6. Use context in the dashboard/[id]/page.tsx to get your data.
 
-
 # Deposit And Withdraw api
+
     In this stage, we introduce several connection system changes by creating a ConnectButton.tsx file and removing the LoginForm. The ConnectButton now handles connection calls and encompasses the login logic.
 
     The primary modifications are made in BalanceButton.tsx and the api/deposit and api/withdraw files, where deposit and withdrawal functionalities are managed.
 
     As a best practice, we've included an actions folder to encapsulate common functions. This folder must be invoked on the server-side for optimal functionality.
 
-
-Changed files: 
+Changed files:
 D: Archivo eliminado.
 A: Archivo añadido (nuevo).
-A       abis/ERC20.json
-A       .vscode/settings.json
-A       src/constants/web3.tsx
-A       src/app/actions/get-user.ts
-A       src/components/ConnectButton.tsx
-A       src/components/BalanceButton.tsx
-A       src/components/SimpleBoxCard.tsx
-A       src/app/actions/get-address-from-signature.ts
-A       src/app/api/deposit/[address]/[hash]/route.ts
-A       src/app/api/withdraw/[address]/[value]/route.ts
+A abis/ERC20.json
+A .vscode/settings.json
+A src/constants/web3.tsx
+A src/app/actions/get-user.ts
+A src/components/ConnectButton.tsx
+A src/components/BalanceButton.tsx
+A src/components/SimpleBoxCard.tsx
+A src/app/actions/get-address-from-signature.ts
+A src/app/api/deposit/[address]/[hash]/route.ts
+A src/app/api/withdraw/[address]/[value]/route.ts
 
 M: Archivo modificado.
-M       .env
-M       src/app/api/login/route.ts : Add balance value
-M       .gitignore : add .env
-M       prisma/schema.prisma :  Add balance param
-M       src/app/dashboard/[id]/page.tsx : add commented status
-M       src/app/layout.tsx : - change 1 line
-M       src/app/page.tsx : commmented some lines
-M       src/components/Nav.tsx : hard changes - add BalanceButton component & ConnnectButton
-M       src/context/Web3Modal.tsx : Add bscTestnet
+M .env
+M src/app/api/login/route.ts : Add balance value
+M .gitignore : add .env
+M prisma/schema.prisma : Add balance param
+M src/app/dashboard/[id]/page.tsx : add commented status
+M src/app/layout.tsx : - change 1 line
+M src/app/page.tsx : commmented some lines
+M src/components/Nav.tsx : hard changes - add BalanceButton component & ConnnectButton
+M src/context/Web3Modal.tsx : Add bscTestnet
 
+# Assets (api)
+
+1. Create asset appi calls in api/assets/route.ts
+2. update prisma schema
+3. upadate crete user in api/login/route.ts. For now, i harcoded some assets, but in the futere we will delete this.
+4. Go to dashboard/[id] update stiles.
+5. In Connect button, add a call to api/assets/route.ts to get all assets and save this in context.
+6. wrap all 'useClient' this in componnets/tools.tsx import this component in page.tsx
+7.

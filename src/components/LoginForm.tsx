@@ -37,7 +37,6 @@ function LoginForm() {
       }
       route.push(`/dashboard/${address}`);
       setUserData(data);
-      console.log(data);
     } catch (error) {
       console.error("Login Error: ", error);
     }

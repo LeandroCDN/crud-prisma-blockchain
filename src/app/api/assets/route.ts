@@ -25,3 +25,13 @@ export async function POST(request: Request) {
     return NextResponse.json(error);
   }
 }
+
+export async function GET(req, { params }) {
+  try {
+    const assets = await prisma?.asset.findMany();
+    return NextResponse.json(assets);
+  } catch (error) {
+    console.log("Prisma Error: ", error);
+    return NextResponse.json(error);
+  }
+}

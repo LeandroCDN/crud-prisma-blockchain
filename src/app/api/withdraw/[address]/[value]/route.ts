@@ -51,23 +51,17 @@ async function getTransactionArguments(transactionHash: string): Promise<any> {
 }
 
 export async function POST(req: Request, { params }) {
-  console.log("deposit RUN");
   try {
     const { address, value } = params;
     let { signedMessage } = await req.json();
-    console.log(signedMessage);
-
     const user = await prisma.user.findUnique({
       where: {
         address: address,
       },
     });
-    console.log("user", user);
     if (!user) return null;
-    console.log("value", value);
     if (user.balance < value) return null;
     // substract the balance in dbb of user
-    console.log("substract RUN");
     const updatedRecord = await prisma.user.update({
       where: { address: address },
       data: { balance: user.balance - value },
@@ -77,8 +71,6 @@ export async function POST(req: Request, { params }) {
     const rs = await withdraw(user.address, value);
     if (rs != null) {
       const transactionData = await getTransactionArguments(rs.transactionHash);
-      console.log("updatedRecord: ", updatedRecord);
-      console.log("Witdraw succefully");
       return NextResponse.json(transactionData);
     } else {
       return NextResponse.json({ error: "Transaction not confirmed." }); // Handle the case when the transaction is not confirmed
