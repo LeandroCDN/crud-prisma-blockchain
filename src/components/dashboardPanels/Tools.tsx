@@ -9,7 +9,7 @@ const Tools = () => {
   const { isConnected } = useWeb3ModalAccount();
 
   useEffect(() => {
-    console.log(tools);
+    // console.log(tools);
   }, [isConnected]);
 
   return (

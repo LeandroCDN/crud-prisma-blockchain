@@ -154,5 +154,10 @@ M src/context/Web3Modal.tsx : Add bscTestnet
 3. upadate crete user in api/login/route.ts. For now, i harcoded some assets, but in the futere we will delete this.
 4. Go to dashboard/[id] update stiles.
 5. In Connect button, add a call to api/assets/route.ts to get all assets and save this in context.
-6. wrap all 'useClient' this in componnets/tools.tsx import this component in page.tsx
+6. wrap all 'useClient' this in components/tools.tsx import this component in page.tsx
 7.
+
+
+
+
+20.

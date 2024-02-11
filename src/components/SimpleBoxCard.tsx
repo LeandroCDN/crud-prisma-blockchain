@@ -2,25 +2,35 @@
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
 import { useRouter } from "next/navigation";
 import { useLoading } from "@/context/loadingContext";
+import React, { useState, useEffect } from 'react';
+
 // import React from "react";
 
 const SimpleBoxCard = (props: any) => {
   const { address, isConnected } = useWeb3ModalAccount();
   const { userData, tools, setUserData } = useLoading();
   const route = useRouter();
+  const [actualProfit, setActualProfit] = useState(props.production);
+
+  useEffect(() => {
+    // Actualizar cada 60 segundos
+    const intervalId = setInterval(() => {
+      setActualProfit(getActualProfit());
+    }, 30000);
+  })
 
   function getActualProfit() {
     const dateNow = new Date();
     const index = parseInt(props.i);
-    const lastHarvestTime = new Date(userData?.assets[index]?.lastHarvest || 0); // Si lastHarvest es null o undefined, establecerlo a 0
+    const toolAtIndex = userData?.assets[index];
+    const lastHarvestTime = new Date(toolAtIndex.lastHarvest || 0); //Si lastHarvest es null o undefined, establecerlo a 0
     const difTime = dateNow.getTime() - lastHarvestTime.getTime();
-
     const difTimeInHours = Math.trunc(difTime / (1000 * 60)); // Convertir milisegundos a horas y truncar
-    let totalProduction = tools[index].production * difTimeInHours;
-    if (totalProduction > tools[index].storage) {
-      totalProduction = tools[index].storage;
+    let totalProduction = tools[toolAtIndex.tool].production * difTimeInHours;
+    
+    if (totalProduction > tools[toolAtIndex.tool].storage) {
+      totalProduction = tools[toolAtIndex.tool].storage;
     }
-
     return totalProduction;
   }
 
@@ -40,8 +50,9 @@ const SimpleBoxCard = (props: any) => {
       },
     });
     const data = await res.json();
-    setUserData(data);
-    console.log("Harvest tool RES: ", data);
+    await setUserData(data);
+    setActualProfit(0);
+    
     route.refresh();
   };
 
@@ -59,7 +70,7 @@ const SimpleBoxCard = (props: any) => {
               Production: {props.production}/Min
             </p>
             <p className="text-gray-800  text-base">
-              Storage: {getActualProfit()}/{props.fullSotorage}
+              Storage: {actualProfit}/{props.fullSotorage}
             </p>
             <p className="text-gray-800  text-base">
               Durability: {props.state}/{props.fullDurability} Days
@@ -75,9 +86,10 @@ const SimpleBoxCard = (props: any) => {
             <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
               Update
             </span>
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
+            <button  onClick={ getActualProfit}
+            className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
               Repair
-            </span>
+            </button>
           </div>
         </div>
       </div>
