@@ -19,22 +19,22 @@ export default async function harvest(address: string, index: number) {
       throw new Error(`Herramienta con nivel ${index} no encontrada`);
     }
     const dateNow = new Date();
-    console.log("index:",index);
+    console.log("index:", index);
     const lastHarvestTime = new Date(user?.assets[index]?.lastHarvest || 0); // Si lastHarvest es null o undefined, establecerlo a 0
-    console.log("lastHarvestTime:",lastHarvestTime.getTime()); 
+    console.log("lastHarvestTime:", lastHarvestTime.getTime());
     const difTime = dateNow.getTime() - lastHarvestTime.getTime();
-    console.log(`index: ${index}. difTime ${difTime}`); 
+    console.log(`index: ${index}. difTime ${difTime}`);
 
     const difTimeInHours = Math.trunc(difTime / (1000 * 60)); // Convertir milisegundos a horas y truncar
-    // if(difTimeInHours < 1) return null
-    console.log(`index: ${index}. difTimeInHours ${difTimeInHours}`); 
-    
+    if (difTimeInHours < 1) return user;
+    console.log(`index: ${index}. difTimeInHours ${difTimeInHours}`);
+
     let totalProduction = toolData.production * difTimeInHours;
-    if(totalProduction == 0) return null
+    if (totalProduction == 0) return user;
     if (totalProduction > toolData.storage) {
       totalProduction = toolData.storage;
     }
-    console.log("totalProduction: ",totalProduction); 
+    console.log("totalProduction: ", totalProduction);
 
     const res = await prisma.user.update({
       where: { address: user.address },

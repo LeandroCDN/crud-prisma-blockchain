@@ -8,6 +8,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  console.log("api call login/");
+
   try {
     let { address, name, assets } = await request.json();
     const balance = 0;

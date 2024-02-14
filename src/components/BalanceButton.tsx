@@ -97,7 +97,7 @@ const Balance = () => {
   return (
     isConnected && (
       <div className="flex flex-row m-4 justify-center px-2 py-1 rounded bg-gray-600 text-xl w-full">
-        <div>Balance: {userData.balance} </div>
+        <div>Balance: {userData?.balance} </div>
         <div className="flex flex-row ml-2">
           <p>|</p>
           <button

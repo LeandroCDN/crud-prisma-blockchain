@@ -2,6 +2,8 @@ import { prisma } from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  console.log("api call assets/");
+
   try {
     let { level, production, storage, durability } = await request.json();
     // address = address.slice(2);

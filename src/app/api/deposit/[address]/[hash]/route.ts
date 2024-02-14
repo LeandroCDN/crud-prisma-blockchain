@@ -33,6 +33,8 @@ async function getTransactionArguments(transactionHash: string): Promise<any> {
 }
 
 export async function POST(req: Request, { params }) {
+  console.log("api call deposit/[address...");
+
   try {
     const { address, hash } = params;
 

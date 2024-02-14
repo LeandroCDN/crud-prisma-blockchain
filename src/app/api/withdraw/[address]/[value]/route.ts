@@ -51,6 +51,7 @@ async function getTransactionArguments(transactionHash: string): Promise<any> {
 }
 
 export async function POST(req: Request, { params }) {
+  console.log("api call withdraw/[address]");
   try {
     const { address, value } = params;
     let { signedMessage } = await req.json();

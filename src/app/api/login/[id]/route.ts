@@ -2,6 +2,8 @@ import { prisma } from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
+  console.log("api call login/[id]");
+
   try {
     const { id } = params;
 

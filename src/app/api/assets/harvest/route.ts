@@ -2,6 +2,8 @@ import harvest from "@/app/actions/harvest";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  console.log("api call assets/harvest");
+
   try {
     let { address, index } = await request.json();
     // address = address.slice(2);
