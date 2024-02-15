@@ -1,4 +1,4 @@
-import { prisma } from "@/libs/prisma";
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { PUBLIC_RPC_URL, TOKEN_CONTRACT, PRIVATE_KEY } from "@/constants/web3";
 import { ethers, providers } from "ethers";

@@ -157,7 +157,9 @@ M src/context/Web3Modal.tsx : Add bscTestnet
 6. wrap all 'useClient' this in components/tools.tsx import this component in page.tsx
 7.
 
+# NEXT AUTH
 
-
-
-20.
+1. api/auth/[...nextAuth]/route.ts
+2. create auth folder
+3. change name login to user and create a new login folder
+<!-- 4. install bcrypt -->

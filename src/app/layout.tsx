@@ -4,6 +4,7 @@ import "./globals.css";
 import { Web3ModalProvider } from "@/context/Web3Modal";
 import Nav from "@/components/Nav";
 import { LoadingProvider } from "@/context/loadingContext";
+import Session from "@/components/layout/session";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +21,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-slate-500">
-        <LoadingProvider>
-          <div>
-            <Web3ModalProvider>
-              <Nav />
-            <div>{children}</div>
-            </Web3ModalProvider>
-          </div>
-        </LoadingProvider>
+        <Session>
+          <LoadingProvider>
+            <div>
+              <Web3ModalProvider>
+                <Nav />
+                <div>{children}</div>
+              </Web3ModalProvider>
+            </div>
+          </LoadingProvider>
+        </Session>
       </body>
     </html>
   );

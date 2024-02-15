@@ -1,28 +1,29 @@
-import { prisma } from "@/libs/prisma";
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+// import * as bcrypt from "bcrypt";
+import getAddress from "@/app/actions/get-address-from-signature";
 
-export async function GET() {
-  //tra todos los registros
-
-  return NextResponse.json("Hello from get");
+interface RequestBody {
+  address: string;
+  signedMessage: string;
 }
 
-export async function POST(request: Request) {
-  console.log("api call login/");
+export async function POST(req: Request) {
+  const body: RequestBody = await req.json();
 
   try {
-    let { address, name, assets } = await request.json();
-    const balance = 0;
-    const newUser = await prisma?.user.create({
-      data: {
-        address,
-        name,
-        balance,
-        assets,
+    const user = await prisma?.user.findUnique({
+      where: {
+        address: body.address,
       },
     });
-
-    return NextResponse.json(newUser);
+    const addresFromMessage = await getAddress(
+      user?.address,
+      body.signedMessage
+    );
+    if (addresFromMessage != null) {
+      return NextResponse.json(user);
+    } else return null;
   } catch (error) {
     console.log("Post Prisma Error: ", error);
     return NextResponse.json(error);

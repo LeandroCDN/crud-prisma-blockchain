@@ -1,4 +1,4 @@
-import { prisma } from "@/libs/prisma";
+import { prisma } from "@/lib/prisma";
 import getUser from "./get-user";
 
 export default async function harvest(address: string, index: number) {
