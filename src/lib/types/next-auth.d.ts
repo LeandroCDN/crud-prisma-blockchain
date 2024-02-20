@@ -5,6 +5,8 @@ declare module "next-auth" {
     user: {
       name: string;
       address: string;
+      assets: Any;
+      balance: number;
     };
   }
 }

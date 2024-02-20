@@ -5,12 +5,27 @@ import { useEffect } from "react";
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
 
 const Tools = () => {
-  const { userData, tools } = useLoading();
+  const { userData, tools, setTools } = useLoading();
   const { isConnected } = useWeb3ModalAccount();
 
   useEffect(() => {
     // console.log(tools);
+    if (tools == null) {
+      setTools(getTools());
+    }
   }, [isConnected]);
+
+  const getTools = async () => {
+    try {
+      let res = await fetch(`/api/assets`, {
+        method: "GET",
+      });
+      let data = await res.json();
+      setTools(data);
+    } catch (error) {
+      console.error("Login Error: ", error);
+    }
+  };
 
   return (
     <div className="flex flex-row justify-center items-center mt-10">

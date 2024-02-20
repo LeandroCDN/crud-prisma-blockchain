@@ -1,10 +1,20 @@
 import NextAuth from "next-auth/next";
 // import { authOptions } from "@/auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { prisma } from "@/lib/prisma";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
-let userData;
+let userData: any;
 
 const handler = NextAuth({
+  // pages: {
+  //   signIn: "/",
+  //   signOut: "/",
+  //   error: "/",
+  //   verifyRequest: "/",
+  //   newUser: "/",
+  // },
+  // adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       id: "web3",
@@ -39,12 +49,15 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session }) {
       // Send properties to the client, like an access_token and user id from a provider.
       session.user = userData as any;
 
       return session;
     },
+  },
+  session: {
+    strategy: "jwt",
   },
 });
 

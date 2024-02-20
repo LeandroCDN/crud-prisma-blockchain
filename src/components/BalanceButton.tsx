@@ -8,6 +8,7 @@ import {
 import { JsonRpcSigner } from "@ethersproject/providers";
 import { ethers } from "ethers";
 import tokenAbi from "@/../abis/ERC20.json";
+import { useSession } from "next-auth/react";
 
 const tokenAddress = "0x6FE09ce1C0Af342EB7eda03Bf393694f20eA5042";
 const devWallet = "0xcaFE155ECc18e5dC2962C2D5840788659b543654";
@@ -16,6 +17,9 @@ const Balance = () => {
   const [value, setValue] = useState("");
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
+
+  const { data: session, status } = useSession();
+  const user = session?.user;
   const { userData } = useLoading();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

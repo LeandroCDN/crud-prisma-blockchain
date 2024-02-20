@@ -14,7 +14,7 @@ const PickaxeCard = (props: any) => {
     if (!isConnected) throw Error("User disconnected");
     // const res = await deposit(address, parseInt(value));
     const lvl = parseInt(props.title);
-    const res = await fetch(`/api/assets/lvl`, {
+    const res = await fetch(`/api/assets/buytool`, {
       method: "POST",
       body: JSON.stringify({
         address,

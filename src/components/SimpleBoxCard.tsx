@@ -12,14 +12,14 @@ const SimpleBoxCard = (props: any) => {
   const route = useRouter();
   const [actualProfit, setActualProfit] = useState(getActualProfit());
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setActualProfit(getActualProfit());
-    }, 1000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setActualProfit(getActualProfit());
+  //   }, 1000);
 
-    // Limpiar el intervalo al desmontar el componente
-    return () => clearInterval(intervalId);
-  }, []);
+  //   // Limpiar el intervalo al desmontar el componente
+  //   return () => clearInterval(intervalId);
+  // }, []);
 
   function repair() {
     setActualProfit(getActualProfit());
@@ -33,11 +33,11 @@ const SimpleBoxCard = (props: any) => {
     const lastHarvestTime = new Date(toolAtIndex.lastHarvest || 0); //Si lastHarvest es null o undefined, establecerlo a 0
     const difTime = dateNow.getTime() - lastHarvestTime.getTime();
     const difTimeInHours = Math.trunc(difTime / (1000 * 60)); // Convertir milisegundos a horas y truncar
+    console.log("tool at index", toolAtIndex.tool);
+    let totalProduction = tools[toolAtIndex.tool]?.production * difTimeInHours;
 
-    let totalProduction = tools[toolAtIndex.tool].production * difTimeInHours;
-
-    if (totalProduction > tools[toolAtIndex.tool].storage) {
-      totalProduction = tools[toolAtIndex.tool].storage;
+    if (totalProduction > tools[toolAtIndex.tool]?.storage) {
+      totalProduction = tools[toolAtIndex.tool]?.storage;
     }
     if (difTime < 1) {
       totalProduction = 0;

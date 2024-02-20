@@ -3,6 +3,7 @@ import Link from "next/link";
 import Balance from "./BalanceButton";
 import ConnectButton from "./ConnectButton";
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
+import GetUserData from "./GetUserData";
 
 const Nav = () => {
   const { address, isConnected } = useWeb3ModalAccount();
@@ -12,6 +13,7 @@ const Nav = () => {
         <Link href="/">
           <h3>HOME</h3>
         </Link>
+        <GetUserData />
       </div>
 
       <div className="absolute left-1/2 transform -translate-x-1/2">

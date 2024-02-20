@@ -7,7 +7,7 @@ export const useLoading = () => useContext(LoadingContext);
 
 export const LoadingProvider = ({ children }) => {
   const [userData, setUserData] = useState("");
-  const [tools, setTools] = useState("");
+  const [tools, setTools] = useState(null);
 
   return (
     <LoadingContext.Provider value={{ userData, setUserData, tools, setTools }}>

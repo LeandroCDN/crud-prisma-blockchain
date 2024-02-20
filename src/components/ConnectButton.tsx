@@ -10,7 +10,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useLoading } from "../context/loadingContext";
 import useWeb3 from "@/hooks/useWeb3";
-import { getSession, useSession } from "next-auth/react";
+import { getSession, useSession, signOut } from "next-auth/react";
+// import { signIn } from "next-auth/react";
 
 function ConnectButton() {
   const [name, setName] = useState("");
@@ -22,23 +23,17 @@ function ConnectButton() {
   const { connect } = useWeb3();
   const { data: session, status } = useSession();
 
-  // console.log("connect button| connect:", connect);
-  // console.log(signer);
-
   useEffect(() => {
-    if (isConnected) {
-      log();
-    } else {
-      route.push("/");
+    if (!isConnected && status === "authenticated") {
+      signOut({ callbackUrl: "http://localhost:3000/" });
     }
-  }, [isConnected]);
-
-  const log = async () => {
-    // const session = await getSession()
-    if (status) {
-      console.log("session.user", session);
+    if (isConnected && status === "authenticated") {
+      getTools();
+      if (session?.user != undefined) {
+        setUserData(session?.user);
+      }
     }
-  };
+  }, [isConnected, status]);
 
   // const login = async () => {
   //   try {

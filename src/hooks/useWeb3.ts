@@ -23,16 +23,16 @@ export default function useWeb3() {
   }, [isConnected]);
 
   const signInUser = async () => {
-    // console.log("user status, session:", status, session);
-    const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
-    // const address = await ethersProvider.getSigner();
-    const signedMessage = await signMessage(ethersProvider.getSigner());
-    const callback = await authUser(address, signedMessage);
-    if (callback?.error) throw new Error(callback.error);
-    router.refresh();
-    console.log("user status:", status, session?.user);
+    console.log("user session:", status);
+    if (status === "unauthenticated") {
+      const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
+      const signedMessage = await signMessage(ethersProvider.getSigner());
+      const callback = await authUser(address, signedMessage);
+      if (callback?.error) throw new Error(callback?.error);
+      router.refresh();
+    }
+    console.log(session?.user);
     return session?.user;
-    // return 1;
   };
 
   const signMessage = async (injected: JsonRpcSigner) => {
@@ -40,11 +40,6 @@ export default function useWeb3() {
       // Aquí firmamos el mensaje "hola mundo"
       const message = "hola mundo";
       const signature = await injected.signMessage(message);
-      // console.log("Signature:", signature);
-      //output : firma
-
-      const signerAddress = ethers.utils.verifyMessage(message, signature);
-      // console.log("signature decoded:", signerAddress);
       return signature;
     } catch (error) {
       console.error("Sign Message Error:", error);
