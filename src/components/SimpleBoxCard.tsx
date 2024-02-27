@@ -2,39 +2,33 @@
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
 import { useRouter } from "next/navigation";
 import { useLoading } from "@/context/loadingContext";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useSession } from "next-auth/react";
 
 // import React from "react";
 
 const SimpleBoxCard = (props: any) => {
   const { address, isConnected } = useWeb3ModalAccount();
-  const { userData, tools, setUserData } = useLoading();
+  const { userData, tools, setUserData }: any = useLoading();
   const route = useRouter();
-  const [actualProfit, setActualProfit] = useState(getActualProfit());
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setActualProfit(getActualProfit());
-  //   }, 1000);
-
-  //   // Limpiar el intervalo al desmontar el componente
-  //   return () => clearInterval(intervalId);
-  // }, []);
+  const { data: session, update } = useSession();
+  const [actualProfit, setActualProfit] = useState(0);
 
   function repair() {
     setActualProfit(getActualProfit());
   }
 
-  function getActualProfit() {
+  const getActualProfit = useCallback(() => {
     const dateNow = new Date();
 
     const index = parseInt(props.i);
     const toolAtIndex = userData?.assets[index];
-    const lastHarvestTime = new Date(toolAtIndex.lastHarvest || 0); //Si lastHarvest es null o undefined, establecerlo a 0
+
+    const lastHarvestTime = new Date(toolAtIndex.lastHarvest || 0);
     const difTime = dateNow.getTime() - lastHarvestTime.getTime();
-    const difTimeInHours = Math.trunc(difTime / (1000 * 60)); // Convertir milisegundos a horas y truncar
-    console.log("tool at index", toolAtIndex.tool);
-    let totalProduction = tools[toolAtIndex.tool]?.production * difTimeInHours;
+
+    const difTimeInSeg = Math.trunc(difTime / (1000 * 60)); //
+    let totalProduction = tools[toolAtIndex.tool]?.production * difTimeInSeg;
 
     if (totalProduction > tools[toolAtIndex.tool]?.storage) {
       totalProduction = tools[toolAtIndex.tool]?.storage;
@@ -42,11 +36,11 @@ const SimpleBoxCard = (props: any) => {
     if (difTime < 1) {
       totalProduction = 0;
     }
-    console.log("getActualProfit actual pro:", totalProduction);
-    return totalProduction;
-  }
 
-  const handleSubmit = async (e) => {
+    return totalProduction;
+  }, [props.i, userData, tools]);
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!isConnected) throw Error("User disconnected");
     // const res = await deposit(address, parseInt(value));
@@ -62,10 +56,34 @@ const SimpleBoxCard = (props: any) => {
       },
     });
     const data = await res.json();
+    await updateSession(data);
     await setUserData(data);
-    getActualProfit();
-    route.refresh();
+    repair();
+    // route.refresh();
   };
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      const profit = getActualProfit();
+
+      if (!isNaN(profit)) {
+        setActualProfit(profit);
+      }
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, [getActualProfit]);
+
+  async function updateSession(data: any) {
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        balance: data.balance,
+        assets: data.assets,
+      },
+    });
+  }
 
   return (
     <div>
@@ -81,7 +99,7 @@ const SimpleBoxCard = (props: any) => {
               Production: {props.production}/Min
             </p>
             <p className="text-gray-800  text-base">
-              Storage: {getActualProfit()}/{props.fullSotorage}
+              Storage: {actualProfit}/{props.fullSotorage}
             </p>
             <p className="text-gray-800  text-base">
               Durability: {props.state}/{props.fullDurability} Days
@@ -90,16 +108,16 @@ const SimpleBoxCard = (props: any) => {
           <div className="px-6 mt-4">
             <button
               onClick={(e) => handleSubmit(e)}
-              className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50"
+              className="inline-block  rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50"
             >
               Harvest
             </button>
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
+            <span className="inline-block  rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
               Update
             </span>
             <button
-              onClick={getActualProfit}
-              className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50"
+              onClick={repair}
+              className="inline-block  rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50"
             >
               Repair
             </button>

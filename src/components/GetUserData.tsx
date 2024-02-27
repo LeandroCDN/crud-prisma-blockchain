@@ -14,6 +14,7 @@ export default function GetUserData() {
     // console.log("userData: ", userData);
     console.log("Tool list: ", tools);
     console.log("session: ", session?.user);
+    console.log("userData: ", userData);
     console.log("session status: ", status);
   }
 

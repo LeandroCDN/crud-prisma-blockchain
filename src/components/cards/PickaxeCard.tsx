@@ -26,7 +26,7 @@ const PickaxeCard = (props: any) => {
     });
     const data = await res.json();
     setUserData(data);
-    console.log("Buy Tool RES: ", data);
+    // console.log("Buy Tool RES: ", data);
     route.refresh();
   };
 

@@ -12,11 +12,30 @@ export async function POST(req: Request) {
   const body: RequestBody = await req.json();
 
   try {
-    const user = await prisma?.user.findUnique({
+    let user = await prisma?.user.findUnique({
       where: {
         address: body.address,
       },
     });
+    // console.log(user);
+    if (user === null) {
+      await fetch("http://localhost:3000/api/user", {
+        method: "POST",
+        body: JSON.stringify({
+          address: body.address,
+          name: "null",
+          assets: []
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      user = await prisma?.user.findUnique({
+        where: {
+          address: body.address,
+        },
+      });
+    }
     const addresFromMessage = await getAddress(
       user?.address,
       body.signedMessage

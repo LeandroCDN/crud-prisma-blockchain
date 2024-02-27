@@ -1,11 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import getUser from "./get-user";
+import { NextResponse } from "next/server";
 
 export default async function buyTool(address: string, lvl: number) {
   try {
     let user = await getUser(address);
     const price = Math.trunc(((lvl + 2) / (5 + lvl)) * 100);
-    if (user?.balance == undefined || user?.balance < price) return null;
+    if (user?.balance == undefined || user?.balance < price) return NextResponse.json({ error: "user?.balance == undefined || user?.balance < price" });
 
     const toolToBuy = await prisma.asset.findFirst({
       where: {
@@ -19,8 +20,8 @@ export default async function buyTool(address: string, lvl: number) {
     const dateNow = new Date();
     const newAsset = {
       tool: toolToBuy.level,
-      lastHarvest: new Date(), // Puedes inicializar lastHarvest según tus requisitos.
-      CreatedAt: new Date(),
+      lastHarvest: dateNow, // Puedes inicializar lastHarvest según tus requisitos.
+      CreatedAt: dateNow,
     };
     user?.assets.push(newAsset);
 

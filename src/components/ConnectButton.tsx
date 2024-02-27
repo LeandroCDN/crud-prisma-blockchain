@@ -13,14 +13,14 @@ import useWeb3 from "@/hooks/useWeb3";
 import { getSession, useSession, signOut } from "next-auth/react";
 // import { signIn } from "next-auth/react";
 
-function ConnectButton() {
+function ConnectButton({ isConnected, address }: any) {
   const [name, setName] = useState("");
   const route = useRouter();
-  const { address, isConnected } = useWeb3ModalAccount();
+  // const { isConnected } = useWeb3ModalAccount();
   const { setUserData, setTools } = useLoading();
   const { walletProvider } = useWeb3ModalProvider();
-  const signerLowerCase = address?.toLowerCase();
-  const { connect } = useWeb3();
+  // const signerLowerCase = address?.toLowerCase();
+  const { connect } = useWeb3(isConnected, address);
   const { data: session, status } = useSession();
 
   useEffect(() => {
@@ -29,49 +29,26 @@ function ConnectButton() {
     }
     if (isConnected && status === "authenticated") {
       getTools();
+      // console.log(awaitconnect());
       if (session?.user != undefined) {
         setUserData(session?.user);
       }
     }
   }, [isConnected, status]);
 
-  // const login = async () => {
-  //   try {
-  //     // axios
-  //     //   const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
-  //     //   const signedMessage = await signMessage(ethersProvider.getSigner());
-  //     // const callback = await authUser(address, signedMessage);
-  //     // if (callback?.error) throw new Error(callback.error);
-  //     await getTools();
-  //     let res = await fetch(`/api/login/${address}`, {
-  //       method: "GET",
-  //     });
-  //     let data = await res.json();
-
-  //     if (data == null) {
-  //       res = await fetch("/api/login", {
-  //         method: "POST",
-  //         body: JSON.stringify({
-  //           address,
-  //           name,
-  //           assets,
-  //         }),
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       });
-  //       data = await res.json();
-  //     }
-  //     if (data.address == address) {
-  //       route.push(`/dashboard/${address}`);
-  //       setUserData(data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Login Error: ", error);
-  //   }
-  // };
-
   const getTools = async () => {
+    try {
+      let res = await fetch(`/api/assets`, {
+        method: "GET",
+      });
+      let data = await res.json();
+      setTools(data);
+    } catch (error) {
+      console.error("Login Error: ", error);
+    }
+  };
+
+  const getUser = async () => {
     try {
       let res = await fetch(`/api/assets`, {
         method: "GET",

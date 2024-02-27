@@ -20,7 +20,7 @@ const Balance = () => {
 
   const { data: session, status } = useSession();
   const user = session?.user;
-  const { userData } = useLoading();
+  const { userData, setUserData } = useLoading();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -77,8 +77,8 @@ const Balance = () => {
         },
       });
       const data = await res.json();
-
-      console.log(data);
+      setUserData(data?.updatedRecord);
+      console.log("withdraw:", data);
     }
   };
 

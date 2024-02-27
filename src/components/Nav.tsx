@@ -14,6 +14,9 @@ const Nav = () => {
           <h3>HOME</h3>
         </Link>
         <GetUserData />
+        <Link href="/userpost">
+          <h3>UserPost</h3>
+        </Link>
       </div>
 
       <div className="absolute left-1/2 transform -translate-x-1/2">
@@ -23,10 +26,11 @@ const Nav = () => {
       <div className="flex flex-row justify-between items-center  ">
         {isConnected && (
           <Link href={`/dashboard/${address}`}>
+            {" "}
             <h3>Profile</h3>
           </Link>
         )}
-        <ConnectButton />
+        <ConnectButton isConnected={isConnected} address={address} />
       </div>
     </nav>
   );

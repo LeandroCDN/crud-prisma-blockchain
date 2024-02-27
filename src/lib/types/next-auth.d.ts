@@ -7,6 +7,7 @@ declare module "next-auth" {
       address: string;
       assets: Any;
       balance: number;
+      assets: any[]
     };
   }
 }

@@ -14,7 +14,7 @@ export default function GetWalletData() {
     console.log("chainId: ", chainId);
     console.log("isConnected: ", isConnected);
     console.log("walletProvider: ", walletProvider);
-    setUserData("HOLA");
+    // setUserData("HOLA");
     console.log("userData: ", userData);
   }
 

@@ -9,9 +9,9 @@ import {
 import { authUser } from "@/helpers/routes";
 import { useRouter } from "next/navigation";
 
-export default function useWeb3() {
+export default function useWeb3(isConnected, address) {
   const { data: session, status } = useSession();
-  const { address, isConnected } = useWeb3ModalAccount();
+  // const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
   const router = useRouter();
 
@@ -22,17 +22,30 @@ export default function useWeb3() {
     }
   }, [isConnected]);
 
+  const connect = async () => {
+    if (isConnected) {
+      const user = await signInUser();
+      return user;
+    }
+  };
+
   const signInUser = async () => {
     console.log("user session:", status);
-    if (status === "unauthenticated") {
-      const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
-      const signedMessage = await signMessage(ethersProvider.getSigner());
-      const callback = await authUser(address, signedMessage);
-      if (callback?.error) throw new Error(callback?.error);
-      router.refresh();
+    try {
+      if (status === "unauthenticated") {
+        const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
+        const signedMessage = await signMessage(ethersProvider.getSigner());
+        const callback = await authUser(address, signedMessage);
+        if (callback?.error) throw new Error(callback?.error);
+        router.refresh();
+      }
+      // console.log(session?.user);
+      return session?.user;
+
+    } catch (error) {
+      console.log(error);
+      return null;
     }
-    console.log(session?.user);
-    return session?.user;
   };
 
   const signMessage = async (injected: JsonRpcSigner) => {
@@ -40,18 +53,14 @@ export default function useWeb3() {
       // Aquí firmamos el mensaje "hola mundo"
       const message = "hola mundo";
       const signature = await injected.signMessage(message);
+      console.log("signature", signature);
       return signature;
     } catch (error) {
       console.error("Sign Message Error:", error);
     }
   };
 
-  const connect = async () => {
-    if (isConnected) {
-      const user = await signInUser();
-      return user;
-    }
-  };
+
 
   return {
     connect,

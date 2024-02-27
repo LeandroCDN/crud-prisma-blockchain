@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import { PUBLIC_RPC_URL, TOKEN_CONTRACT, PRIVATE_KEY } from "@/constants/web3";
 import { ethers, providers } from "ethers";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
 
 async function withdraw(address, value) {
   const provider = new providers.WebSocketProvider(
@@ -53,6 +55,9 @@ async function getTransactionArguments(transactionHash: string): Promise<any> {
 export async function POST(req: Request, { params }) {
   console.log("api call withdraw/[address]");
   try {
+    const session = await getServerSession(authOptions);
+    console.log("api call withdraw/[address], session.user:", session?.user);
+    if (!session?.user) return NextResponse.json({ error: "Session not confirmed." });
     const { address, value } = params;
     let { signedMessage } = await req.json();
     const user = await prisma.user.findUnique({
@@ -60,8 +65,8 @@ export async function POST(req: Request, { params }) {
         address: address,
       },
     });
-    if (!user) return null;
-    if (user.balance < value) return null;
+    if (!user) return NextResponse.json({ error: "user not confirmed." });
+    if (user.balance < value) return NextResponse.json({ error: "user.balance < value" });
     // substract the balance in dbb of user
     const updatedRecord = await prisma.user.update({
       where: { address: address },
@@ -72,7 +77,7 @@ export async function POST(req: Request, { params }) {
     const rs = await withdraw(user.address, value);
     if (rs != null) {
       const transactionData = await getTransactionArguments(rs.transactionHash);
-      return NextResponse.json(transactionData);
+      return NextResponse.json({ transactionData, updatedRecord });
     } else {
       return NextResponse.json({ error: "Transaction not confirmed." }); // Handle the case when the transaction is not confirmed
     }
