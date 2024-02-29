@@ -3,7 +3,7 @@ import Image from "next/image";
 const HomePage = () => {
   return (
     <section>
-      <div className="flex flex-row justify-center h-[calc(100vh-150px)] bg-gradient-to-r from-yellow-500 to-red-500 mt-10">
+      <div className="flex flex-row justify-center h-[calc(100vh-150px)] bg-gradient-to-r to-yellow-500 from-red-500 mt-10">
         <div className="flex justify-center items-center w-1/2  ">
           <div>
             <h3 className="text-5xl text-black font-extrabold">

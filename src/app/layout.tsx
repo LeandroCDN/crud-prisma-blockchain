@@ -20,13 +20,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-r to-yellow-500 from-red-500">
+      <body className="bg-gradient-to-r to-yellow-500 from-red-500 overflow-y-auto">
         <Session>
           <LoadingProvider>
-            <div className=" ">
+            <div className="flex flex-col h-screen">
               <Web3ModalProvider>
                 <Nav />
-                <div>{children}</div>
+                <div className="flex-grow overflow-hidden">{children}</div>
               </Web3ModalProvider>
             </div>
           </LoadingProvider>

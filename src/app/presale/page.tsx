@@ -1,4 +1,4 @@
-import PreSale from "@/components/pages/PreSale";
+import PreSale from "@/components/pages/PreSale/PreSale";
 
 const PreSalePage = () => {
   return (

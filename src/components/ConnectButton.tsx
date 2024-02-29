@@ -60,6 +60,6 @@ function ConnectButton({ isConnected, address }: any) {
     }
   };
 
-  return <w3m-button />;
+  return <w3m-button balance="hide" />;
 }
 export default ConnectButton;
