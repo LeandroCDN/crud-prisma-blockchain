@@ -20,10 +20,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-slate-500">
+      <body className="bg-gradient-to-r to-yellow-500 from-red-500">
         <Session>
           <LoadingProvider>
-            <div>
+            <div className=" ">
               <Web3ModalProvider>
                 <Nav />
                 <div>{children}</div>

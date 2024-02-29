@@ -8,29 +8,42 @@ import GetUserData from "./GetUserData";
 const Nav = () => {
   const { address, isConnected } = useWeb3ModalAccount();
   return (
-    <nav className="flex flex-row justify-between  items-center bg-black text-whit px-3 py-1">
-      <div className="p-1 flex flex-row gap-2 items-center">
-        <Link href="/">
-          <h3>HOME</h3>
-        </Link>
-        <GetUserData />
-        <Link href="/userpost">
-          <h3>UserPost</h3>
-        </Link>
+    <nav className="flex flex-row justify-between mt-2 min-h-12 mx-7 ">
+      <div className="flex justify-start items-center w-1/2 pl-4">
+        <h1 className="text-4xl text-black">Ever Poo Game</h1>
       </div>
-
-      <div className="absolute left-1/2 transform -translate-x-1/2">
-        <Balance />
-      </div>
-
-      <div className="flex flex-row justify-between items-center  ">
-        {isConnected && (
-          <Link href={`/dashboard/${address}`}>
-            {" "}
-            <h3>Profile</h3>
+      <div className="flex flex-row justify-between  items-center bg-black text-white w-1/2 rounded-lg border border-yellow-500">
+        <div className="ml-4 flex flex-row items-center ">
+          <Link
+            className="min-h-12 flex justify-center items-center hover:bg-yellow-500 hover:text-black cursor-pointer px-6"
+            href="/"
+          >
+            <h3>HOME</h3>
           </Link>
-        )}
-        <ConnectButton isConnected={isConnected} address={address} />
+
+          {/* <GetUserData /> */}
+          <Link
+            className="min-h-12 flex justify-center items-center hover:bg-yellow-500 hover:text-black cursor-pointer px-6"
+            href="/presale"
+          >
+            <h3>TOKEN SALE</h3>
+          </Link>
+        </div>
+
+        <div className="h-full flex items-center">
+          <Balance />
+        </div>
+
+        <div className="flex flex-row justify-between items-center mr-2 h-full">
+          <div className="border-l border-yellow-500 h-full mx-2"></div>
+          {isConnected && (
+            <Link href={`/dashboard/${address}`}>
+              {" "}
+              <h3>Profile</h3>
+            </Link>
+          )}
+          <ConnectButton isConnected={isConnected} address={address} />
+        </div>
       </div>
     </nav>
   );

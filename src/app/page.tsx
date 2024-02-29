@@ -1,11 +1,11 @@
 import GetWalletData from "@/components/GetWalletData";
 import LoginForm from "@/components/LoginForm";
+import HomePage from "@/components/pages/HomePage";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {/* <LoginForm />
-      <GetWalletData /> */}
+    <main className="">
+      <HomePage />
     </main>
   );
 }

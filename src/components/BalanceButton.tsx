@@ -100,7 +100,7 @@ const Balance = () => {
 
   return (
     isConnected && (
-      <div className="flex flex-row m-4 justify-center px-2 py-1 rounded bg-gray-600 text-xl w-full">
+      <div className="flex flex-row  justify-center items-center px-2    text-xl h-full">
         <div>Balance: {userData?.balance} </div>
         <div className="flex flex-row ml-2">
           <p>|</p>
@@ -108,11 +108,16 @@ const Balance = () => {
             className="ml-1 px-1 rounded-full text-white border border-black border-opacity-10 hover:border-opacity-20 hover:shadow-md transition duration-300"
             onClick={handleButtonClick}
           >
-            &#8595;
+            {isMenuOpen ? "x" : "↓"}
           </button>
         </div>
         {isMenuOpen && (
-          <div className="absolute bg-gray-600 text-white w-full px-2 py-1 top-11 ">
+          <div className="fixed text-white px-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl border border-yellow-500 bg-white bg-opacity-15 w-96 h-40">
+            <div className="flex justify-end">
+              <button className=" text-white" onClick={handleButtonClick}>
+                x
+              </button>
+            </div>
             <form>
               <input
                 type="text"
@@ -124,7 +129,7 @@ const Balance = () => {
               />
               <div className="flex flex-row justify-between">
                 <button
-                  className="rounded p-1 text-white border border-black border-opacity-10 hover:border-opacity-20 hover:shadow-md transition duration-300"
+                  className="rounded p-1 text-white border  border-black border-opacity-10 hover:border-opacity-20 hover:shadow-md transition duration-300"
                   onClick={(e) => handleSubmit(e, "deposit")}
                 >
                   Deposit
