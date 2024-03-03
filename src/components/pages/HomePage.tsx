@@ -23,13 +23,14 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-1/2 flex flex-col items-center justify-center overflow-hidden">
           <Image
-            src="/indor.png"
+            src="/indors/Pink.png"
             alt="Descripción de la imagen"
             layout="fixed"
-            width={600}
-            height={498}
+            width={1000}
+            height={998}
+            style={{ transform: "rotate(-10deg)" }}
           />
         </div>
       </div>

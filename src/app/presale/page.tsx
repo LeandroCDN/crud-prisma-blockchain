@@ -1,9 +1,9 @@
-import PreSale from "@/components/pages/PreSale/PreSale";
+import PreSalePage from "@/components/pages/PreSale/PreSalePage";
 
-const PreSalePage = () => {
+const PreSale = () => {
   return (
-    <div>
-      <PreSale />
+    <div className="">
+      <PreSalePage />
     </div>
   );
 };
