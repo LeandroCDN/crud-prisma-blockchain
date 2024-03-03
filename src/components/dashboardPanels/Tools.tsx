@@ -40,6 +40,7 @@ const Tools = () => {
             fullSotorage={tools[asset.tool]?.storage}
             state="difTime"
             fullDurability={tools[asset.tool]?.durability}
+
             // Ajusta las propiedades según las necesidades de tu aplicación y los datos en la matriz
           />
         ))}

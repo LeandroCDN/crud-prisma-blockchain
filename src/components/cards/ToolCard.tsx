@@ -96,7 +96,7 @@ const ToolCard = (props: any) => {
           </div>
           <div className="HOLA flex flex-row border-b-2">
             <div className="w-2/3 pl-2">
-              <p className="text-gray-800  text-base mb-2">
+              <p className="text-gray-800  text-base my-2">
                 Production: {props.production}/Min
               </p>
               <p className="text-gray-800  text-base mb-2">
@@ -106,7 +106,7 @@ const ToolCard = (props: any) => {
                 Durability: {props.state}/{props.fullDurability} Days
               </p>
             </div>
-            <div className="w-1/3 border-l-2 flex justify-center items-center">
+            <div className="w-1/3 border-l-2 flex justify-center items-center bg-black bg-opacity-20">
               <Image
                 src="/indors/Pink.png"
                 alt="Descripción de la imagen"

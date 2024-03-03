@@ -13,10 +13,15 @@ const Buy = () => {
 
   return (
     <div className="flex flex-col items-center  pt-4 ">
-      <h1> SHOP!</h1>
-      <GetUserData />
+      {/* <h1> SHOP!</h1>
+      <GetUserData /> */}
 
-      <div className="flex flex-row justify-center items-center mt-10">
+      <div className="w-full flex flex-col justify-center items-center ">
+        <h3 className="text-xl">SHOP</h3>
+      </div>
+      <div className="w-full border-b-2"></div>
+
+      <div className="flex flex-row justify-center items-center mt-2">
         <div className="flex flex-col gap-4">
           {Array.isArray(tools) &&
             tools.map((asset, index) => (
