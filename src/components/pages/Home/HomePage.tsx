@@ -1,4 +1,5 @@
 import Image from "next/image";
+import MiddleSection from "./MiddleSection";
 
 const HomePage = () => {
   return (
@@ -25,7 +26,7 @@ const HomePage = () => {
         </div>
         <div className="w-1/2 flex flex-col items-center justify-center overflow-hidden">
           <Image
-            src="/indors/Pink.png"
+            src="/indors/0.png"
             alt="Descripción de la imagen"
             layout="fixed"
             width={1000}
@@ -33,6 +34,9 @@ const HomePage = () => {
             style={{ transform: "rotate(-10deg)" }}
           />
         </div>
+      </div>
+      <div>
+        <MiddleSection />
       </div>
     </section>
   );

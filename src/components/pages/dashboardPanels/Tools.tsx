@@ -1,5 +1,5 @@
 "use client";
-import { useLoading } from "../../context/loadingContext";
+import { useLoading } from "../../../context/loadingContext";
 import ToolCard from "@/components/cards/ToolCard";
 import { useEffect } from "react";
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
@@ -29,12 +29,12 @@ const Tools = () => {
 
   return (
     <div className="flex flex-row justify-center items-center mt-10">
-      <div className="grid xl:grid-cols-3 sm:grid-cols-2 gap-4 h-auto">
+      <div className="grid xl:grid-cols-3 sm:grid-cols-2 gap-1 h-auto">
         {userData?.assets?.map((asset, index) => (
           <ToolCard
             key={index} // Asegúrate de proporcionar una clave única para cada tarjeta
             i={index}
-            title={`Pico LVL ${asset.tool}`}
+            title={`${asset.tool}`}
             production={tools[asset.tool]?.production}
             storage="DifTime"
             fullSotorage={tools[asset.tool]?.storage}

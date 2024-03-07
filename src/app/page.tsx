@@ -1,6 +1,4 @@
-import GetWalletData from "@/components/GetWalletData";
-import LoginForm from "@/components/LoginForm";
-import HomePage from "@/components/pages/HomePage";
+import HomePage from "@/components/pages/Home/HomePage";
 
 export default function Home() {
   return (

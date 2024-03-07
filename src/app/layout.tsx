@@ -24,7 +24,7 @@ export default function RootLayout({
         <Session>
           <LoadingProvider>
             <Web3ModalProvider>
-              <div className="flex flex-col ">
+              <div className="flex flex-col  ">
                 <Nav />
                 <div>{children}</div>
               </div>

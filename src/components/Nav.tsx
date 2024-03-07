@@ -48,7 +48,7 @@ const Nav = () => {
           <div className="flex flex-row justify-between items-center mr-2 h-full">
             <div className="border-l border-yellow-500 h-full mx-2"></div>
             {isConnected && (
-              <Link href={`/dashboard/${address}`}>
+              <Link href={`/profile`}>
                 {" "}
                 <h3>Profile</h3>
               </Link>

@@ -92,7 +92,7 @@ const ToolCard = (props: any) => {
         <div className="flex-col xl:max-w-[60%] max-w-[70%]  shadow-lg rounded-xl border border-radius mb-5 xl:mb-0 min-w-80 bg-white bg-opacity-10">
           {/* <img src="https://i.postimg.cc/SxLx0fHV/bg01.jpg" alt="image3" className="w-full h-48 imgcard object-cover mb-2" /> */}
           <div className="flex  flex-row justify-center items-center w-full  border-b-2">
-            <div className="text-2xl">{props.title}</div>
+            <div className="text-2xl">Indoor {props.title}</div>
           </div>
           <div className="HOLA flex flex-row border-b-2">
             <div className="w-2/3 pl-2">
@@ -108,7 +108,7 @@ const ToolCard = (props: any) => {
             </div>
             <div className="w-1/3 border-l-2 flex justify-center items-center bg-black bg-opacity-20">
               <Image
-                src="/indors/Pink.png"
+                src={`/indors/${props.title}.png`}
                 alt="Descripción de la imagen"
                 layout="fixed"
                 width={500}

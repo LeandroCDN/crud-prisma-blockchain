@@ -6,7 +6,7 @@ import Image from "next/image";
 
 // import React from "react";
 
-const PickaxeCard = (props: any) => {
+const BuyCard = (props: any) => {
   const { address, isConnected } = useWeb3ModalAccount();
   const { setUserData } = useLoading();
   const route = useRouter();
@@ -40,72 +40,45 @@ const PickaxeCard = (props: any) => {
           <div className="flex  flex-row justify-center items-center w-full  border-b-2">
             <div className="text-2xl">Indor {props.title}</div>
           </div>
-          <div className="HOLA flex flex-row border-b-2">
+          <div className=" flex flex-row border-b-2 mb-2">
             <div className="w-2/3 pl-2">
               <p className="text-gray-800  text-base my-2">
                 Production: {props.production}/Min
               </p>
-              <p className="text-gray-800  text-base mb-2">Storage: 1/100</p>
               <p className="text-gray-800  text-base mb-2">
-                Durability: 20/200 Days
+                Storage: {props.fullSotorage}
+              </p>
+              <p className="text-gray-800  text-base mb-2">
+                Durability: {props.fullDurability} Days
               </p>
             </div>
             <div className="w-1/3 border-l-2 flex justify-center items-center bg-black bg-opacity-20">
               <Image
-                src="/indors/Maerly.png"
+                src={`/indors/${props.title}.png`}
                 alt="Descripción de la imagen"
-                layout="fixed"
+                // layout="fixed"
                 width={500}
                 height={499}
                 style={{ transform: "rotate(-10deg)" }}
               />
             </div>
           </div>
-          <div className="px-6 mt-4 flex justify-between">
-            <p>Price: 50 pups</p>
-            <button className="inline-block  rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50">
+          <div className="px-6 text-xl flex justify-between items-center mb-2">
+            <p>
+              Price: {Math.trunc(((props.title + 2) / (5 + props.title)) * 100)}{" "}
+              PUPS
+            </p>
+            <button
+              onClick={(e) => handleSubmit(e)}
+              className="inline-block  rounded-xl text-xl px-2 py-1 font-bold text-gray-800  border border-white-200 hover:bg-black hover:bg-opacity-70 hover:text-white bg-white bg-opacity-50  "
+            >
               Buy
             </button>
           </div>
         </div>
       </div>
     </div>
-
-    // <div>
-    //   <div className="flex flex-col xl:flex-row items-center justify-center xl:items-stretch my-4 ">
-    //     <div className="flex flex-col shadow-lg rounded-xl border border-radius mb-5 xl:mb-0 bg-white w-60 bg-opacity-30">
-    //       <div className="px-5 py-3">
-    //         <div className="flex flex-row justify-between w-full">
-    //           <div
-    //             className={` text-xl mb-2 }`}
-    //           >{`INDOR LVL ${props.title}`}</div>
-    //         </div>
-    //         <p className="text-gray-800  text-base">
-    //           Procution: {props.production}/Min
-    //         </p>
-    //         <p className="text-gray-800  text-base">
-    //           Storage: {props.fullSotorage}
-    //         </p>
-    //         <p className="text-gray-800  text-base">
-    //           Durability: {props.fullDurability} Days
-    //         </p>
-    //         <p className="text-black ">
-    //           Price: {Math.trunc(((props.title + 2) / (5 + props.title)) * 100)}
-    //           pups
-    //         </p>
-    //       </div>
-    //       <div className="px-6 mt-2">
-    //         <button
-    //           onClick={(e) => handleSubmit(e)}
-    //           className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-bold text-gray-800 mr-2 mb-2 border border-white-200 bg-white bg-opacity-50"
-    //         >
-    //           BUY
-    //         </button>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
-export default PickaxeCard;
+export default BuyCard;

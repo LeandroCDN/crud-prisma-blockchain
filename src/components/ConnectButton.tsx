@@ -63,3 +63,32 @@ function ConnectButton({ isConnected, address }: any) {
   return <w3m-button balance="hide" />;
 }
 export default ConnectButton;
+
+/**
+ * GET COOKIE FOR THE REFFERED:
+ * 
+ * 
+    import React, { useEffect } from "react";
+    import Cookies from "js-cookie";
+
+    const AnotherComponent = () => {
+      useEffect(() => {
+        // Recupera el valor de la cookie "refID"
+        const refIDValue = Cookies.get("refID");
+
+        // Hacer algo con el valor de refID, por ejemplo, imprimirlo en la consola
+        console.log("Valor de refID:", refIDValue);
+      }, []); // Ajusta las dependencias según sea necesario
+
+      // Resto del componente
+      return (
+        <div>
+          { Contenido del componente }
+          </div>
+          );
+        };
+        
+    export default AnotherComponent;
+ * 
+ * 
+ */

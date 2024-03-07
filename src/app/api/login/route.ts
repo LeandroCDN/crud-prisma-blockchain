@@ -6,10 +6,13 @@ import getAddress from "@/app/actions/get-address-from-signature";
 interface RequestBody {
   address: string;
   signedMessage: string;
+  referrer: string
+  referred: number
 }
 
 export async function POST(req: Request) {
   const body: RequestBody = await req.json();
+
 
   try {
     let user = await prisma?.user.findUnique({
@@ -24,6 +27,8 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           address: body.address,
           name: "null",
+          referrer: body.referred,
+          referred: 0,
           assets: []
         }),
         headers: {
