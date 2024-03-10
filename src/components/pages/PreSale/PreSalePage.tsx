@@ -12,7 +12,7 @@ const PreSalePage = () => {
 
         <div className="w-1/2  flex flex-col items-center justify-center max-h-[calc(100vh-150px)]">
           <Image
-            src="/indor.png"
+            src="/indors/0.png"
             alt="Descripción de la imagen"
             layout="fixed"
             width={600}

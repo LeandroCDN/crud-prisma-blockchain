@@ -11,7 +11,7 @@ const Nav = () => {
     <div>
       <nav className="flex flex-row justify-between mt-2 min-h-12 mx-7 ">
         <div className="flex justify-start items-center w-1/2 pl-4">
-          <h1 className="text-5xl font-bold text-black">Ever Poo Game</h1>
+          <h1 className="text-5xl font-bold text-black">Ever Poo Games</h1>
         </div>
         <div className="flex flex-row justify-between  items-center bg-black text-white w-1/2 rounded-lg border border-yellow-500">
           <div className="ml-4 flex flex-row items-center ">

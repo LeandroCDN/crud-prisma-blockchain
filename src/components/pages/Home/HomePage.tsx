@@ -1,7 +1,20 @@
+"use client";
 import Image from "next/image";
 import MiddleSection from "./MiddleSection";
-
+import { useState, useEffect } from "react";
 const HomePage = () => {
+  const [imageNumber, setImageNumber] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Cambiar el número de la imagen de 0 a 5 y viceversa en un bucle
+      setImageNumber((prevNumber) => (prevNumber + 1) % 6);
+    }, 1000);
+
+    // Limpiar el intervalo cuando el componente se desmonta
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section>
       <div className="flex flex-row justify-center h-[calc(100vh-150px)] bg-gradient-to-r to-yellow-500 from-red-500 mt-10">
@@ -26,7 +39,7 @@ const HomePage = () => {
         </div>
         <div className="w-1/2 flex flex-col items-center justify-center overflow-hidden">
           <Image
-            src="/indors/0.png"
+            src={`/indors/${imageNumber}.png`}
             alt="Descripción de la imagen"
             layout="fixed"
             width={1000}

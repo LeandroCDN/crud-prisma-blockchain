@@ -1,3 +1,4 @@
+"use client";
 import Home from "../page";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";

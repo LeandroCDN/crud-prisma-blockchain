@@ -21,8 +21,6 @@ model User {
   address   String   @unique
   name      String
   balance   Float
-  referrer  String
-  referred  Int
   cretedAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
   assets    Assets[]
