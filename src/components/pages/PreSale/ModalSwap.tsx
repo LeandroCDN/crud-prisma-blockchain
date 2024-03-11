@@ -81,14 +81,14 @@ const ModalSwap = () => {
     setYourPoints(userData.points.toString());
 
     //[yourInvestment, setYourInvestment]
-    setYourInvestment(userData.amount.toString());
+    setYourInvestment(ethers.utils.formatEther(userData.amount.toString()));
 
     //[totalVolume, setTotalVolume]
     const volumen = await SEEDSALEContract?.totalVolumen();
-    setTotalVolume(volumen.toString());
+    setTotalVolume(ethers.utils.formatEther(volumen.toString()));
 
     //[totalPoints, setTotalPoints]
-    const tPoints = await SEEDSALEContract?.totalVolumen();
+    const tPoints = await SEEDSALEContract?.totalPoints();
     setTotalPoints(tPoints.toString());
   };
 
@@ -103,20 +103,30 @@ const ModalSwap = () => {
     if (ERC20Contract == null || SEEDSALEContract == null) {
       await buildContracts();
     }
-
+    const youPayInWei = ethers.utils.parseEther(youPay.toString());
     const approve = await ERC20Contract?.approve(
       SEEDSALE.toString(),
-      youPay.toString()
+      youPayInWei.toString(),
+      {
+        gasLimit: ethers.utils.hexlify(300000), // ajusta este valor según tus necesidades
+      }
     );
     setApproveStatus("Approving");
+    console.log("Approving");
     const rsApprove = await approve.wait();
 
     if (rsApprove != null) {
       setApproveStatus("Approved");
-      const buyPoints = await SEEDSALEContract?.buyPoints(youPay.toString());
+      console.log(approveStatus);
+      const buyPoints = await SEEDSALEContract?.buyPoints(
+        youPayInWei.toString(),
+        {
+          gasLimit: ethers.utils.hexlify(300000), // ajusta este valor según tus necesidades
+        }
+      );
       const rsBuyPoints = await buyPoints.wait();
       if (rsBuyPoints != null) {
-        alert("Points buy");
+        alert("Points buyed");
       }
     }
   };
@@ -132,7 +142,7 @@ const ModalSwap = () => {
           </div>
           <div className="flex">
             <span className=" text-white">
-              1 usd: {price != "" ? (1 / parseInt(price)).toFixed(1) : 0} points
+              1 usd: {price != "" ? 1 / price : 0} points
             </span>
           </div>
         </div>
@@ -180,7 +190,7 @@ const ModalSwap = () => {
                 placeholder="0"
                 readOnly
                 value={(
-                  parseInt(youPay) * parseInt((1 / parseInt(price)).toFixed(1))
+                  parseInt(youPay) * parseInt((1 / price).toFixed(1))
                 ).toFixed(1)}
                 className="text-4xl bg-black rounded-md focus:outline-none focus:none mb-2 max-w-52"
               />
@@ -194,9 +204,7 @@ const ModalSwap = () => {
             {isConnected ? (
               <button
                 type="button"
-                onClick={() => {
-                  console.log(SEEDSALEContract);
-                }}
+                onClick={handleSubmit}
                 className="rounded p-4 text-2xl text-white border bg-yellow-400 w-full border-black border-opacity-10 hover:border-opacity-20 hover:shadow-md transition duration-300"
               >
                 Buy Points

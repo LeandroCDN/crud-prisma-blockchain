@@ -9,7 +9,7 @@ import { JsonRpcSigner } from "@ethersproject/providers";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useLoading } from "../context/loadingContext";
-import useWeb3 from "@/hooks/useWeb3";
+// import useWeb3 from "@/hooks/useWeb3";
 import { getSession, useSession, signOut } from "next-auth/react";
 // import { signIn } from "next-auth/react";
 
@@ -22,7 +22,7 @@ function ConnectButton({ isConnected, address, chainId }: any) {
   const { setUserData, setTools } = useLoading();
   const { walletProvider } = useWeb3ModalProvider();
   // const signerLowerCase = address?.toLowerCase();
-  const { connect } = useWeb3(isConnected, address);
+  // const { connect } = useWeb3(isConnected, address);
   const { data: session, status } = useSession();
 
   useEffect(() => {
