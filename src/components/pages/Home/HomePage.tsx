@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import MiddleSection from "./MiddleSection";
+// import MiddleSection from "./MiddleSection";
 import { useState, useEffect } from "react";
 const HomePage = () => {
   const [imageNumber, setImageNumber] = useState(0);
@@ -47,9 +47,6 @@ const HomePage = () => {
             style={{ transform: "rotate(-10deg)" }}
           />
         </div>
-      </div>
-      <div>
-        <MiddleSection />
       </div>
     </section>
   );

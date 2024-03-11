@@ -6,34 +6,34 @@ import { createWeb3Modal, defaultConfig } from "@web3modal/ethers5/react";
 const projectId = "f7e865ce875e12010dbe54cf9a03a3a1";
 
 // 2. Set chains
-const mainnet = {
-  chainId: 1,
-  name: "Ethereum",
-  currency: "ETH",
-  explorerUrl: "https://etherscan.io",
-  rpcUrl: "https://cloudflare-eth.com",
-};
+// const mainnet = {
+//   chainId: 1,
+//   name: "Ethereum",
+//   currency: "ETH",
+//   explorerUrl: "https://etherscan.io",
+//   rpcUrl: "https://cloudflare-eth.com",
+// };
 
 const testnet = {
   chainId: 97,
   name: "BSCTest",
-  currency: "tBSC",
+  currency: "tBNB",
   explorerUrl: "https://testnet.bscscan.com/",
-  rpcUrl: "https://bsc-testnet.publicnode.com",
+  rpcUrl: "https://endpoints.omniatech.io/v1/bsc/testnet/public",
 };
-
 
 // 3. Create modal
 const metadata = {
   name: "My Website",
   description: "My Website description",
-  url: "https://mywebsite.com",
+  url: "http://localhost:3000/",
   icons: ["https://avatars.mywebsite.com/"],
 };
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
-  chains: [mainnet, testnet],
+  defaultChain: testnet,
+  chains: [testnet],
   projectId,
 });
 

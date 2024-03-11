@@ -13,7 +13,9 @@ import useWeb3 from "@/hooks/useWeb3";
 import { getSession, useSession, signOut } from "next-auth/react";
 // import { signIn } from "next-auth/react";
 
-function ConnectButton({ isConnected, address }: any) {
+// todo change network
+
+function ConnectButton({ isConnected, address, chainId }: any) {
   const [name, setName] = useState("");
   const route = useRouter();
   // const { isConnected } = useWeb3ModalAccount();
@@ -24,17 +26,44 @@ function ConnectButton({ isConnected, address }: any) {
   const { data: session, status } = useSession();
 
   useEffect(() => {
-    if (!isConnected && status === "authenticated") {
-      signOut({ callbackUrl: "http://localhost:3000/" });
-    }
-    if (isConnected && status === "authenticated") {
-      getTools();
-      // console.log(awaitconnect());
-      if (session?.user != undefined) {
-        setUserData(session?.user);
+    if (isConnected) {
+      if (chainId != 97 && chainId != undefined) {
+        switchNetwork();
       }
     }
-  }, [isConnected, status]);
+  }, [chainId, isConnected]);
+
+  async function switchNetwork() {
+    try {
+      const chainId = "0x61"; // 97 en hexadecimal
+
+      if (window.ethereum && window.ethereum.request) {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId }],
+        });
+      } else {
+        console.error(
+          "MetaMask no está instalado o no es compatible con wallet_switchEthereumChain"
+        );
+      }
+    } catch (error) {
+      console.error("Error al cambiar de red:", error);
+    }
+  }
+
+  // useEffect(() => {
+  //   if (!isConnected && status === "authenticated") {
+  //     signOut({ callbackUrl: "http://localhost:3000/" });
+  //   }
+  //   if (isConnected && status === "authenticated") {
+  //     getTools();
+  //     // console.log(awaitconnect());
+  //     if (session?.user != undefined) {
+  //       setUserData(session?.user);
+  //     }
+  //   }
+  // }, [isConnected, status]);
 
   const getTools = async () => {
     try {

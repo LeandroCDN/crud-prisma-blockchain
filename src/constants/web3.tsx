@@ -7,3 +7,9 @@ export const TOKEN_CONTRACT = {
   address: process.env.NEXT_PUBLIC_TOKEN_ADDRESS as string,
   abi: JSON.parse(ERC20ABI.result),
 };
+
+export const TOKEN_BSCTEST_ADDRESS = process.env
+  .NEXT_PUBLIC_TOKEN_BSCTEST_ADDRESS as string;
+
+export const SEEDSALE = process.env
+  .NEXT_PUBLIC_SEEDCONTRACT_BSCTEST_ADDRESS as string;
