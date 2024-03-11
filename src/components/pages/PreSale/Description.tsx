@@ -9,9 +9,9 @@ const Description = () => {
             </div>
             <p>
               EverPooGame is an experimental game created by a YouTube
-              developer, and due to the meme's momentum, he decided to release
-              it publicly. Consider the following points when making your
-              purchase decision:
+              developer, and due to the meme&apos;s momentum, he decided to
+              release it publicly. Consider the following points when making
+              your purchase decision:
             </p>
             <ol className="list-decimal pl-4">
               <li>
@@ -53,9 +53,9 @@ const Description = () => {
                 <ol className="list-decimal pl-4">
                   <li>
                     <p>
-                      The start of the 'last week' will be announced on all
-                      platforms, as it will be the final week where you can
-                      decide to maintain or withdraw your position.
+                      The start of the &apos;last week&apos; will be announced
+                      on all platforms, as it will be the final week where you
+                      can decide to maintain or withdraw your position.
                     </p>
                   </li>
                   <li>
