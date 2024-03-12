@@ -37,6 +37,6 @@ createWeb3Modal({
   projectId,
 });
 
-export function Web3ModalProvider({ children }) {
+export function Web3ModalProvider({ children }: any) {
   return children;
 }
