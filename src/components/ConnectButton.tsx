@@ -19,7 +19,7 @@ function ConnectButton({ isConnected, address, chainId }: any) {
   const [name, setName] = useState("");
   const route = useRouter();
   // const { isConnected } = useWeb3ModalAccount();
-  const { setUserData, setTools } = useLoading();
+  const { setUserData, setTools }: any = useLoading();
   const { walletProvider } = useWeb3ModalProvider();
   // const signerLowerCase = address?.toLowerCase();
   // const { connect } = useWeb3(isConnected, address);
