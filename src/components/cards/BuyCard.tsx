@@ -8,10 +8,10 @@ import Image from "next/image";
 
 const BuyCard = (props: any) => {
   const { address, isConnected } = useWeb3ModalAccount();
-  const { setUserData } = useLoading();
+  const { setUserData }: any = useLoading();
   const route = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (!isConnected) throw Error("User disconnected");
     // const res = await deposit(address, parseInt(value));

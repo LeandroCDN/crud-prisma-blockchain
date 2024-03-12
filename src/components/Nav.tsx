@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import Balance from "./BalanceButton";
+// import Balance from "./BalanceButton";
 import ConnectButton from "./ConnectButton";
 import { useWeb3ModalAccount, useWeb3Modal } from "@web3modal/ethers5/react";
-import GetUserData from "./GetUserData";
+// import GetUserData from "./GetUserData";
 
 const Nav = () => {
   const { address, isConnected, chainId } = useWeb3ModalAccount();
