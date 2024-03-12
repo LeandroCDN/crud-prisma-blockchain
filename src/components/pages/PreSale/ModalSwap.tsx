@@ -142,7 +142,7 @@ const ModalSwap = () => {
           </div>
           <div className="flex">
             <span className=" text-white">
-              1 usd: {price != "" ? 1 / price : 0} points
+              1 usd: {price != "" ? 1 / parseFloat(price) : 0} points
             </span>
           </div>
         </div>
@@ -190,7 +190,8 @@ const ModalSwap = () => {
                 placeholder="0"
                 readOnly
                 value={(
-                  parseInt(youPay) * parseInt((1 / price).toFixed(1))
+                  parseFloat(youPay) *
+                  parseFloat((1 / parseFloat(price)).toFixed(1))
                 ).toFixed(1)}
                 className="text-4xl bg-black rounded-md focus:outline-none focus:none mb-2 max-w-52"
               />

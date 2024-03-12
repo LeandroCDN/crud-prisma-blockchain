@@ -38,7 +38,7 @@ function ConnectButton({ isConnected, address, chainId }: any) {
       const chainId = "0x61"; // 97 en hexadecimal
 
       if (window.ethereum && window.ethereum.request) {
-        await window.ethereum.request({
+        await (window as any).ethereum.request({
           method: "wallet_switchEthereumChain",
           params: [{ chainId }],
         });
