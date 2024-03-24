@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     );
     if (addresFromMessage != null) {
       return NextResponse.json(user);
-    } else return null;
+    } else NextResponse.json({ error: 'Forbidden signature' }, { status: 403 });
   } catch (error) {
     console.log("Post Prisma Error: ", error);
     return NextResponse.json(error);

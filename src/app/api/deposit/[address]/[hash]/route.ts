@@ -45,9 +45,15 @@ export async function POST(req: Request, { params }: any) {
         address: address,
       },
     });
-    if (transactionData.from != user?.address) return null;
 
-    if (!user) return null;
+    if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
+
+    if (transactionData.from !== user?.address) {
+      NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+    }
+    // if (transactionData.from != user?.address) return null;
+
+    // if (!user) return null;
     const updatedBalance = user.balance + transactionData.erc20Value; // here must go arguments erc20Value;
 
     const updatedRecord = await prisma.user.update({
@@ -58,6 +64,6 @@ export async function POST(req: Request, { params }: any) {
     return NextResponse.json(updatedRecord);
   } catch (error: any) {
     console.log("deposit.ts error:", error);
-    return null;
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

@@ -9,7 +9,7 @@ import {
 import { authUser } from "@/helpers/routes";
 import { useRouter } from "next/navigation";
 
-export default function useWeb3(isConnected, address) {
+export default function useWeb3(isConnected: any, address: any) {
   const { data: session, status } = useSession();
   // const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
