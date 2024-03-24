@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+const url = process.env.NEXTAUTH_URL;
 
 export const authOptions: AuthOptions = {
   pages: {
@@ -26,7 +27,7 @@ export const authOptions: AuthOptions = {
       async authorize(credentials, req) {
         console.log("...nextauth: address", credentials?.address);
 
-        const res = await fetch("http://localhost:3000/api/login", {
+        const res = await fetch(`${url}/api/login`, {
           method: "POST",
           body: JSON.stringify({
             address: credentials?.address,

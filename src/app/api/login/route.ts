@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 // import * as bcrypt from "bcrypt";
 import getAddress from "@/app/actions/get-address-from-signature";
 
+const url = process.env.NEXTAUTH_URL;
+
 interface RequestBody {
   address: string;
   signedMessage: string;
@@ -22,7 +24,7 @@ export async function POST(req: Request) {
     });
     // console.log(user);
     if (user === null) {
-      await fetch("http://localhost:3000/api/user", {
+      await fetch(`${url}/api/user`, {
         method: "POST",
         body: JSON.stringify({
           address: body.address,

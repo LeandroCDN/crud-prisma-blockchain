@@ -14,6 +14,7 @@ import { getSession, useSession, signOut } from "next-auth/react";
 // import { signIn } from "next-auth/react";
 
 // todo change network
+const url = process.env.NEXTAUTH_URL;
 
 function ConnectButton({ isConnected, address, chainId }: any) {
   const [name, setName] = useState("");
@@ -54,7 +55,7 @@ function ConnectButton({ isConnected, address, chainId }: any) {
 
   useEffect(() => {
     if (!isConnected && status === "authenticated") {
-      signOut({ callbackUrl: "http://localhost:3000/" });
+      signOut({ callbackUrl: url });
     }
     if (isConnected && status === "authenticated") {
       getTools();
