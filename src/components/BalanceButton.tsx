@@ -30,7 +30,7 @@ const Balance = () => {
 
   const handleSubmit = async (e: any, action: any) => {
     e.preventDefault();
-    if (!isConnected) throw Error("User disconnected");
+    if (!isConnected || !walletProvider) throw Error("User disconnected");
 
     const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
     const signer = await ethersProvider.getSigner();
