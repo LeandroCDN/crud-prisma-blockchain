@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import getUserByAddress from "./get-user";
 
-export default async function getAddress(address, signedMessage) {
+export default async function getAddress(address: any, signedMessage: any) {
   const user = await getUserByAddress(address);
 
   if (!user) return null;

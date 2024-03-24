@@ -33,11 +33,13 @@ export default function useWeb3(isConnected: any, address: any) {
     console.log("user session:", status);
     try {
       if (status === "unauthenticated") {
-        const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
-        const signedMessage = await signMessage(ethersProvider.getSigner());
-        const callback = await authUser(address, signedMessage);
-        if (callback?.error) throw new Error(callback?.error);
-        router.refresh();
+        if (walletProvider) {
+          const ethersProvider = new ethers.providers.Web3Provider(walletProvider);
+          const signedMessage = await signMessage(ethersProvider.getSigner());
+          const callback = await authUser(address, signedMessage);
+          if (callback?.error) throw new Error(callback?.error);
+          router.refresh();
+        }
       }
       // console.log(session?.user);
       return session?.user;
