@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-// import Balance from "./BalanceButton";
+import Balance from "./BalanceButton";
 import ConnectButton from "./ConnectButton";
 import { useWeb3ModalAccount, useWeb3Modal } from "@web3modal/ethers5/react";
 // import GetUserData from "./GetUserData";
@@ -23,6 +23,15 @@ const Nav = () => {
             >
               <h3>HOME</h3>
             </Link>
+            {isConnected && (
+              <Link
+                className="min-h-12 flex justify-center items-center hover:bg-yellow-500 hover:text-black cursor-pointer px-6"
+                href={`/dashboard/${address}`}
+              >
+                {" "}
+                <h3>GAME</h3>
+              </Link>
+            )}
 
             {/* <GetUserData /> */}
 
@@ -34,12 +43,18 @@ const Nav = () => {
             </Link>
           </div>
 
-          {/* <div className="h-full flex items-center">
+          <div className="h-full flex items-center">
             <Balance />
-          </div> */}
+          </div>
 
           <div className="flex flex-row justify-between items-center mr-2 h-full">
             <div className="border-l border-yellow-500 h-full mx-2"></div>
+            {isConnected && (
+              <Link href={`/profile`}>
+                {" "}
+                <h3>Profile</h3>
+              </Link>
+            )}
             <ConnectButton
               isConnected={isConnected}
               address={address}
