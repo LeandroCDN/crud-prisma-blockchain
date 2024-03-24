@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-const OptionBar = ({ onSelectOption }) => {
+const OptionBar = ({ onSelectOption }: any) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleOptionClick = (option) => {
+  const handleOptionClick = (option: any) => {
     setSelectedOption(option);
     onSelectOption(option); // Pasa la opción seleccionada al componente principal
   };

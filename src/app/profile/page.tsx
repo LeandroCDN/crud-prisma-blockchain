@@ -6,10 +6,10 @@ import WalletConfig from "@/components/pages/profile/WalletConfig";
 import DepositHistory from "@/components/pages/profile/DepositHistory";
 import Refers from "@/components/pages/profile/Refers";
 
-const Profile = ({ params }) => {
+const Profile = ({ params }: any) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleSelectOption = (option) => {
+  const handleSelectOption = (option: any) => {
     setSelectedOption(option);
   };
   return (

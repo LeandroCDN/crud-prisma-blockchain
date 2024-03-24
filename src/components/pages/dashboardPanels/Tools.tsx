@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useWeb3ModalAccount } from "@web3modal/ethers5/react";
 
 const Tools = () => {
-  const { userData, tools, setTools } = useLoading();
+  const { userData, tools, setTools }: any = useLoading();
   const { isConnected } = useWeb3ModalAccount();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Tools = () => {
   return (
     <div className="flex flex-row justify-center items-center mt-10">
       <div className="grid xl:grid-cols-3 sm:grid-cols-2 gap-1 h-auto">
-        {userData?.assets?.map((asset, index) => (
+        {userData?.assets?.map((asset: any, index: any) => (
           <ToolCard
             key={index} // Asegúrate de proporcionar una clave única para cada tarjeta
             i={index}

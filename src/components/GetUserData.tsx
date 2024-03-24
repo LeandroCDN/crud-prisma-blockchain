@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 
 export default function GetUserData() {
   const { address, chainId, isConnected } = useWeb3ModalAccount();
-  const { userData, tools } = useLoading();
+  const { userData, tools }: any = useLoading();
   const { data: session, status } = useSession();
   async function getBalance() {
     // console.log("userData: ", userData);

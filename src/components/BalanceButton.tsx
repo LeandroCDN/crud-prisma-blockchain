@@ -28,7 +28,7 @@ const Balance = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSubmit = async (e, action) => {
+  const handleSubmit = async (e: any, action: any) => {
     e.preventDefault();
     if (!isConnected) throw Error("User disconnected");
 

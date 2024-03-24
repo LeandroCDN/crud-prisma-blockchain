@@ -10,7 +10,7 @@ interface RequestBody {
     signedMessage: string;
 }
 
-export async function GET(req: Request, { params }) {
+export async function GET(req: Request, { params }: any) {
     //   const body: RequestBody = await req.json();
     const { address } = params;
     try {

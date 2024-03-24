@@ -5,7 +5,7 @@ import { ethers, providers } from "ethers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/auth";
 
-async function withdraw(address, value) {
+async function withdraw(address: any, value: any) {
   const provider = new providers.WebSocketProvider(
     "wss://bsc-testnet.publicnode.com"
   );
@@ -52,7 +52,7 @@ async function getTransactionArguments(transactionHash: string): Promise<any> {
   }
 }
 
-export async function POST(req: Request, { params }) {
+export async function POST(req: Request, { params }: any) {
   console.log("api call withdraw/[address]");
   try {
     const session = await getServerSession(authOptions);

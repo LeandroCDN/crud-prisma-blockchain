@@ -8,7 +8,7 @@ import {
 export default function GetWalletData() {
   const { address, chainId, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
-  const { userData, setUserData } = useLoading();
+  const { userData, setUserData }: any = useLoading();
   async function getBalance() {
     console.log("address: ", address);
     console.log("chainId: ", chainId);

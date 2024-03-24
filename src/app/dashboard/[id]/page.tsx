@@ -1,7 +1,7 @@
 import Tools from "@/components/pages/dashboardPanels/Tools";
 import Buy from "@/components/pages/dashboardPanels/Buy";
 
-const Dashboard = ({ params }) => {
+const Dashboard = ({ params }: any) => {
   return (
     <div className="flex flex-col lg:flex-row bg-black bg-opacity-15 mt-1 max-h-[calc(100vh-62px)]">
       {/* Columna izquierda - 70% en pantallas grandes y el 100% en pantallas pequeñas */}

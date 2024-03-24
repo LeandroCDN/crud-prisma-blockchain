@@ -28,7 +28,7 @@ export async function POST(request: Request) {
   }
 }
 
-export async function GET(req, { params }) {
+export async function GET(req: any, { params }: any) {
   try {
     const assets = await prisma?.asset.findMany();
     return NextResponse.json(assets);
