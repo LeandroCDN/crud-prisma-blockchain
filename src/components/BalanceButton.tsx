@@ -112,7 +112,7 @@ const Balance = () => {
           </button>
         </div>
         {isMenuOpen && (
-          <div className="fixed text-white px-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl border border-yellow-500 bg-white bg-opacity-15 w-96 h-40">
+          <div className="fixed text-white px-2 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl border border-yellow-500 bg-white bg-opacity-15 w-96 h-40 z-50">
             <div className="flex justify-end">
               <button className=" text-white" onClick={handleButtonClick}>
                 x
