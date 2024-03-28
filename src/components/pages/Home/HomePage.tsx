@@ -17,13 +17,13 @@ const HomePage = () => {
 
   return (
     <section>
-      <div className="flex flex-row justify-center h-[calc(100vh-150px)] bg-gradient-to-r to-yellow-500 from-red-500 mt-10">
-        <div className="flex justify-center items-center w-1/2  ">
-          <div>
-            <h3 className="text-5xl text-black font-extrabold">
+      <div className="flex sm:flex-row flex-col justify-center h-[calc(100vh-150px)] bg-gradient-to-r to-yellow-500 from-red-500 mt-10 min-w-screen">
+        <div className="flex justify-center items-center  w-screen min-w-1/2 px-1 sm:px-0">
+          <div className="flex justify-center flex-col">
+            <h3 className="text-5xl text-black font-extrabold text-center">
               THE GAME WHERE YOU PAY
             </h3>
-            <h3 className="text-5xl text-black flex justify-center font-extrabold">
+            <h3 className="text-5xl text-black flex justify-center font-extrabold text-center">
               TO BE SCAMMED
             </h3>
 
@@ -37,7 +37,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/2 flex flex-col items-center justify-center overflow-hidden">
+        <div className="flex flex-col items-center justify-center overflow-hidden sm:w-screen sm:max-w-1/2 mt-6 sm:mt-0">
           <Image
             src={`/indors/${imageNumber}.png`}
             alt="Descripción de la imagen"
